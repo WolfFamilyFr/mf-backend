@@ -1,485 +1,300 @@
 package comics
 
 import (
-	"strconv"
-
-	"github.com/bchaillou003/marvel-family-backend/sdk"
-	"github.com/gofiber/fiber/v2"
+	business "github.com/bchaillou003/marvel-family-backend/business/comics"
+	"github.com/bchaillou003/marvel-family-backend/models/comics"
+	"github.com/bchaillou003/marvel-family-backend/utils"
+	"github.com/gin-gonic/gin"
 )
 
-func GetAllCharacter(c *fiber.Ctx) error {
-	result, err := sdk.GetAllCharacter()
-	if err != nil {
-		return c.Status(500).JSON(err)
-	}
-	return c.Status(200).JSON(result)
+const (
+	paramID = "id"
+)
+
+func GetAllCharacter(c *gin.Context) (*comics.CharacterDataWrapper, error) {
+	return business.GetAllCharacter(c.Request.Context())
 }
 
-func GetCharacterByID(c *fiber.Ctx) error {
-	id, err := strconv.Atoi(c.Params("id"))
+func GetCharacterByID(c *gin.Context) (*comics.CharacterDataWrapper, error) {
+	id, err := utils.StringToInt64(c.Param(paramID))
 	if err != nil {
-		return c.Status(500).JSON(err)
+		return nil, err
 	}
-
-	result, err := sdk.GetCharacterByID(id)
-	if err != nil {
-		return c.Status(500).JSON(err)
-	}
-	return c.Status(200).JSON(result)
+	return business.GetCharacterByID(c.Request.Context(), id)
 }
 
-func GetAllComicByCharacterID(c *fiber.Ctx) error {
-	characterID, err := strconv.Atoi(c.Params("characterID"))
+func GetAllComicByCharacterID(c *gin.Context) (*comics.ComicDataWrapper, error) {
+	id, err := utils.StringToInt64(c.Param(paramID))
 	if err != nil {
-		return c.Status(500).JSON(err)
+		return nil, err
 	}
-
-	result, err := sdk.GetAllComicByCharacterID(characterID)
-	if err != nil {
-		return c.Status(500).JSON(err)
-	}
-	return c.Status(200).JSON(result)
+	return business.GetAllComicByCharacterID(c.Request.Context(), id)
 }
 
-func GetAllEventByCharacterID(c *fiber.Ctx) error {
-	characterID, err := strconv.Atoi(c.Params("characterID"))
+func GetAllEventByCharacterID(c *gin.Context) (*comics.EventDataWrapper, error) {
+	id, err := utils.StringToInt64(c.Param(paramID))
 	if err != nil {
-		return c.Status(500).JSON(err)
+		return nil, err
 	}
-
-	result, err := sdk.GetAllEventByCharacterID(characterID)
-	if err != nil {
-		return c.Status(500).JSON(err)
-	}
-	return c.Status(200).JSON(result)
+	return business.GetAllEventByCharacterID(c.Request.Context(), id)
 }
 
-func GetAllSeriesByCharacterID(c *fiber.Ctx) error {
-	characterID, err := strconv.Atoi(c.Params("characterID"))
+func GetAllSeriesByCharacterID(c *gin.Context) (*comics.SeriesDataWrapper, error) {
+	id, err := utils.StringToInt64(c.Param(paramID))
 	if err != nil {
-		return c.Status(500).JSON(err)
+		return nil, err
 	}
-
-	result, err := sdk.GetAllSeriesByCharacterID(characterID)
-	if err != nil {
-		return c.Status(500).JSON(err)
-	}
-	return c.Status(200).JSON(result)
+	return business.GetAllSeriesByCharacterID(c.Request.Context(), id)
 }
 
-func GetAllStoriesByCharacterID(c *fiber.Ctx) error {
-	characterID, err := strconv.Atoi(c.Params("characterID"))
+func GetAllStoriesByCharacterID(c *gin.Context) (*comics.StoryDataWrapper, error) {
+	id, err := utils.StringToInt64(c.Param(paramID))
 	if err != nil {
-		return c.Status(500).JSON(err)
+		return nil, err
 	}
-
-	result, err := sdk.GetAllStoriesByCharacterID(characterID)
-	if err != nil {
-		return c.Status(500).JSON(err)
-	}
-	return c.Status(200).JSON(result)
+	return business.GetAllStoriesByCharacterID(c.Request.Context(), id)
 }
 
-func GetAllComic(c *fiber.Ctx) error {
-	result, err := sdk.GetAllComic()
-	if err != nil {
-		return c.Status(500).JSON(err)
-	}
-	return c.Status(200).JSON(result)
+func GetAllComic(c *gin.Context) (*comics.ComicDataWrapper, error) {
+	return business.GetAllComic(c.Request.Context())
 }
 
-func GetComicByID(c *fiber.Ctx) error {
-	id, err := strconv.Atoi(c.Params("id"))
+func GetComicByID(c *gin.Context) (*comics.ComicDataWrapper, error) {
+	id, err := utils.StringToInt64(c.Param(paramID))
 	if err != nil {
-		return c.Status(500).JSON(err)
+		return nil, err
 	}
-
-	result, err := sdk.GetCharacterByID(id)
-	if err != nil {
-		return c.Status(500).JSON(err)
-	}
-	return c.Status(200).JSON(result)
+	return business.GetComicByID(c.Request.Context(), id)
 }
 
-func GetAllCharacterByComicID(c *fiber.Ctx) error {
-	comicID, err := strconv.Atoi(c.Params("comicID"))
+func GetAllCharacterByComicID(c *gin.Context) (*comics.CharacterDataWrapper, error) {
+	id, err := utils.StringToInt64(c.Param(paramID))
 	if err != nil {
-		return c.Status(500).JSON(err)
+		return nil, err
 	}
-
-	result, err := sdk.GetAllCharacterByComicID(comicID)
-	if err != nil {
-		return c.Status(500).JSON(err)
-	}
-	return c.Status(200).JSON(result)
+	return business.GetAllCharacterByComicID(c.Request.Context(), id)
 }
 
-func GetAllCreatorByComicID(c *fiber.Ctx) error {
-	comicID, err := strconv.Atoi(c.Params("comicID"))
+func GetAllCreatorByComicID(c *gin.Context) (*comics.CreatorDataWrapper, error) {
+	id, err := utils.StringToInt64(c.Param(paramID))
 	if err != nil {
-		return c.Status(500).JSON(err)
+		return nil, err
 	}
-
-	result, err := sdk.GetAllCreatorByComicID(comicID)
-	if err != nil {
-		return c.Status(500).JSON(err)
-	}
-	return c.Status(200).JSON(result)
+	return business.GetAllCreatorByComicID(c.Request.Context(), id)
 }
 
-func GetAllEventByComicID(c *fiber.Ctx) error {
-	comicID, err := strconv.Atoi(c.Params("comicID"))
+func GetAllEventByComicID(c *gin.Context) (*comics.EventDataWrapper, error) {
+	id, err := utils.StringToInt64(c.Param(paramID))
 	if err != nil {
-		return c.Status(500).JSON(err)
+		return nil, err
 	}
-
-	result, err := sdk.GetAllEventByComicID(comicID)
-	if err != nil {
-		return c.Status(500).JSON(err)
-	}
-	return c.Status(200).JSON(result)
+	return business.GetAllEventByComicID(c.Request.Context(), id)
 }
 
-func GetAllStoryByComicID(c *fiber.Ctx) error {
-	comicID, err := strconv.Atoi(c.Params("comicID"))
+func GetAllStoryByComicID(c *gin.Context) (*comics.StoryDataWrapper, error) {
+	id, err := utils.StringToInt64(c.Param(paramID))
 	if err != nil {
-		return c.Status(500).JSON(err)
+		return nil, err
 	}
-
-	result, err := sdk.GetAllStoryByComicID(comicID)
-	if err != nil {
-		return c.Status(500).JSON(err)
-	}
-	return c.Status(200).JSON(result)
+	return business.GetAllStoryByComicID(c.Request.Context(), id)
 }
 
-func GetAllCreator(c *fiber.Ctx) error {
-	result, err := sdk.GetAllCreator()
-	if err != nil {
-		return c.Status(500).JSON(err)
-	}
-	return c.Status(200).JSON(result)
+func GetAllCreator(c *gin.Context) (*comics.CreatorDataWrapper, error) {
+	return business.GetAllCreator(c.Request.Context())
 }
 
-func GetCreatorByID(c *fiber.Ctx) error {
-	id, err := strconv.Atoi(c.Params("id"))
+func GetCreatorByID(c *gin.Context) (*comics.CreatorDataWrapper, error) {
+	id, err := utils.StringToInt64(c.Param(paramID))
 	if err != nil {
-		return c.Status(500).JSON(err)
+		return nil, err
 	}
-
-	result, err := sdk.GetCreatorByID(id)
-	if err != nil {
-		return c.Status(500).JSON(err)
-	}
-	return c.Status(200).JSON(result)
+	return business.GetCreatorByID(c.Request.Context(), id)
 }
 
-func GetAllComicByCreatorID(c *fiber.Ctx) error {
-	creatorID, err := strconv.Atoi(c.Params("creatorID"))
+func GetAllComicByCreatorID(c *gin.Context) (*comics.ComicDataWrapper, error) {
+	id, err := utils.StringToInt64(c.Param(paramID))
 	if err != nil {
-		return c.Status(500).JSON(err)
+		return nil, err
 	}
-
-	result, err := sdk.GetAllComicByCreatorID(creatorID)
-	if err != nil {
-		return c.Status(500).JSON(err)
-	}
-	return c.Status(200).JSON(result)
+	return business.GetAllComicByCreatorID(c.Request.Context(), id)
 }
 
-func GetAllEventByCreatorID(c *fiber.Ctx) error {
-	creatorID, err := strconv.Atoi(c.Params("creatorID"))
+func GetAllEventByCreatorID(c *gin.Context) (*comics.EventDataWrapper, error) {
+	id, err := utils.StringToInt64(c.Param(paramID))
 	if err != nil {
-		return c.Status(500).JSON(err)
+		return nil, err
 	}
-
-	result, err := sdk.GetAllEventByCreatorID(creatorID)
-	if err != nil {
-		return c.Status(500).JSON(err)
-	}
-	return c.Status(200).JSON(result)
+	return business.GetAllEventByCreatorID(c.Request.Context(), id)
 }
 
-func GetAllSeriesByCreatorID(c *fiber.Ctx) error {
-	creatorID, err := strconv.Atoi(c.Params("creatorID"))
+func GetAllSeriesByCreatorID(c *gin.Context) (*comics.SeriesDataWrapper, error) {
+	id, err := utils.StringToInt64(c.Param(paramID))
 	if err != nil {
-		return c.Status(500).JSON(err)
+		return nil, err
 	}
-
-	result, err := sdk.GetAllSeriesByCreatorID(creatorID)
-	if err != nil {
-		return c.Status(500).JSON(err)
-	}
-	return c.Status(200).JSON(result)
+	return business.GetAllSeriesByCreatorID(c.Request.Context(), id)
 }
 
-func GetAllStoryByCreatorID(c *fiber.Ctx) error {
-	creatorID, err := strconv.Atoi(c.Params("creatorID"))
+func GetAllStoryByCreatorID(c *gin.Context) (*comics.StoryDataWrapper, error) {
+	id, err := utils.StringToInt64(c.Param(paramID))
 	if err != nil {
-		return c.Status(500).JSON(err)
+		return nil, err
 	}
-
-	result, err := sdk.GetAllStoryByCreatorID(creatorID)
-	if err != nil {
-		return c.Status(500).JSON(err)
-	}
-	return c.Status(200).JSON(result)
+	return business.GetAllStoryByCreatorID(c.Request.Context(), id)
 }
 
-func GetAllEvent(c *fiber.Ctx) error {
-	result, err := sdk.GetAllEvent()
-	if err != nil {
-		return c.Status(500).JSON(err)
-	}
-	return c.Status(200).JSON(result)
+func GetAllEvent(c *gin.Context) (*comics.EventDataWrapper, error) {
+	return business.GetAllEvent(c.Request.Context())
 }
 
-func GetEventByID(c *fiber.Ctx) error {
-	id, err := strconv.Atoi(c.Params("id"))
+func GetEventByID(c *gin.Context) (*comics.EventDataWrapper, error) {
+	id, err := utils.StringToInt64(c.Param(paramID))
 	if err != nil {
-		return c.Status(500).JSON(err)
+		return nil, err
 	}
-
-	result, err := sdk.GetEventByID(id)
-	if err != nil {
-		return c.Status(500).JSON(err)
-	}
-	return c.Status(200).JSON(result)
+	return business.GetEventByID(c.Request.Context(), id)
 }
 
-func GetAllCharacterByEventID(c *fiber.Ctx) error {
-	eventID, err := strconv.Atoi(c.Params("eventID"))
+func GetAllCharacterByEventID(c *gin.Context) (*comics.CharacterDataWrapper, error) {
+	id, err := utils.StringToInt64(c.Param(paramID))
 	if err != nil {
-		return c.Status(500).JSON(err)
+		return nil, err
 	}
-
-	result, err := sdk.GetAllCharacterByEventID(eventID)
-	if err != nil {
-		return c.Status(500).JSON(err)
-	}
-	return c.Status(200).JSON(result)
+	return business.GetAllCharacterByEventID(c.Request.Context(), id)
 }
 
-func GetAllComicByEventID(c *fiber.Ctx) error {
-	eventID, err := strconv.Atoi(c.Params("eventID"))
+func GetAllComicByEventID(c *gin.Context) (*comics.ComicDataWrapper, error) {
+	id, err := utils.StringToInt64(c.Param(paramID))
 	if err != nil {
-		return c.Status(500).JSON(err)
+		return nil, err
 	}
-
-	result, err := sdk.GetAllComicByEventID(eventID)
-	if err != nil {
-		return c.Status(500).JSON(err)
-	}
-	return c.Status(200).JSON(result)
+	return business.GetAllComicByEventID(c.Request.Context(), id)
 }
 
-func GetAllCreatorByEventID(c *fiber.Ctx) error {
-	eventID, err := strconv.Atoi(c.Params("eventID"))
+func GetAllCreatorByEventID(c *gin.Context) (*comics.CreatorDataWrapper, error) {
+	id, err := utils.StringToInt64(c.Param(paramID))
 	if err != nil {
-		return c.Status(500).JSON(err)
+		return nil, err
 	}
-
-	result, err := sdk.GetAllCreatorByEventID(eventID)
-	if err != nil {
-		return c.Status(500).JSON(err)
-	}
-	return c.Status(200).JSON(result)
+	return business.GetAllCreatorByEventID(c.Request.Context(), id)
 }
 
-func GetAllSeriesByEventID(c *fiber.Ctx) error {
-	eventID, err := strconv.Atoi(c.Params("eventID"))
+func GetAllSeriesByEventID(c *gin.Context) (*comics.SeriesDataWrapper, error) {
+	id, err := utils.StringToInt64(c.Param(paramID))
 	if err != nil {
-		return c.Status(500).JSON(err)
+		return nil, err
 	}
-
-	result, err := sdk.GetAllSeriesByEventID(eventID)
-	if err != nil {
-		return c.Status(500).JSON(err)
-	}
-	return c.Status(200).JSON(result)
+	return business.GetAllSeriesByEventID(c.Request.Context(), id)
 }
 
-func GetAllStoryByEventID(c *fiber.Ctx) error {
-	eventID, err := strconv.Atoi(c.Params("eventID"))
+func GetAllStoryByEventID(c *gin.Context) (*comics.StoryDataWrapper, error) {
+	id, err := utils.StringToInt64(c.Param(paramID))
 	if err != nil {
-		return c.Status(500).JSON(err)
+		return nil, err
 	}
-
-	result, err := sdk.GetAllStoryByEventID(eventID)
-	if err != nil {
-		return c.Status(500).JSON(err)
-	}
-	return c.Status(200).JSON(result)
+	return business.GetAllStoryByEventID(c.Request.Context(), id)
 }
 
-func GetAllSeries(c *fiber.Ctx) error {
-	result, err := sdk.GetAllSeries()
-	if err != nil {
-		return c.Status(500).JSON(err)
-	}
-	return c.Status(200).JSON(result)
+func GetAllSeries(c *gin.Context) (*comics.SeriesDataWrapper, error) {
+	return business.GetAllSeries(c.Request.Context())
 }
 
-func GetSeriesByID(c *fiber.Ctx) error {
-	id, err := strconv.Atoi(c.Params("id"))
+func GetSeriesByID(c *gin.Context) (*comics.SeriesDataWrapper, error) {
+	id, err := utils.StringToInt64(c.Param(paramID))
 	if err != nil {
-		return c.Status(500).JSON(err)
+		return nil, err
 	}
-
-	result, err := sdk.GetSeriesByID(id)
-	if err != nil {
-		return c.Status(500).JSON(err)
-	}
-	return c.Status(200).JSON(result)
+	return business.GetSeriesByID(c.Request.Context(), id)
 }
 
-func GetAllCharacterBySeriesID(c *fiber.Ctx) error {
-	seriesID, err := strconv.Atoi(c.Params("seriesID"))
+func GetAllCharacterBySeriesID(c *gin.Context) (*comics.CharacterDataWrapper, error) {
+	id, err := utils.StringToInt64(c.Param(paramID))
 	if err != nil {
-		return c.Status(500).JSON(err)
+		return nil, err
 	}
-
-	result, err := sdk.GetAllCharacterBySeriesID(seriesID)
-	if err != nil {
-		return c.Status(500).JSON(err)
-	}
-	return c.Status(200).JSON(result)
+	return business.GetAllCharacterBySeriesID(c.Request.Context(), id)
 }
 
-func GetAllComicBySeriesID(c *fiber.Ctx) error {
-	seriesID, err := strconv.Atoi(c.Params("seriesID"))
+func GetAllComicBySeriesID(c *gin.Context) (*comics.ComicDataWrapper, error) {
+	id, err := utils.StringToInt64(c.Param(paramID))
 	if err != nil {
-		return c.Status(500).JSON(err)
+		return nil, err
 	}
-
-	result, err := sdk.GetAllComicBySeriesID(seriesID)
-	if err != nil {
-		return c.Status(500).JSON(err)
-	}
-	return c.Status(200).JSON(result)
+	return business.GetAllComicBySeriesID(c.Request.Context(), id)
 }
 
-func GetAllCreatorBySeriesID(c *fiber.Ctx) error {
-	seriesID, err := strconv.Atoi(c.Params("seriesID"))
+func GetAllCreatorBySeriesID(c *gin.Context) (*comics.CreatorDataWrapper, error) {
+	id, err := utils.StringToInt64(c.Param(paramID))
 	if err != nil {
-		return c.Status(500).JSON(err)
+		return nil, err
 	}
-
-	result, err := sdk.GetAllCreatorBySeriesID(seriesID)
-	if err != nil {
-		return c.Status(500).JSON(err)
-	}
-	return c.Status(200).JSON(result)
+	return business.GetAllCreatorBySeriesID(c.Request.Context(), id)
 }
 
-func GetAllEventBySeriesID(c *fiber.Ctx) error {
-	seriesID, err := strconv.Atoi(c.Params("seriesID"))
+func GetAllEventBySeriesID(c *gin.Context) (*comics.EventDataWrapper, error) {
+	id, err := utils.StringToInt64(c.Param(paramID))
 	if err != nil {
-		return c.Status(500).JSON(err)
+		return nil, err
 	}
-
-	result, err := sdk.GetAllEventBySeriesID(seriesID)
-	if err != nil {
-		return c.Status(500).JSON(err)
-	}
-	return c.Status(200).JSON(result)
+	return business.GetAllEventBySeriesID(c.Request.Context(), id)
 }
 
-func GetAllStoryBySeriesID(c *fiber.Ctx) error {
-	seriesID, err := strconv.Atoi(c.Params("seriesID"))
+func GetAllStoryBySeriesID(c *gin.Context) (*comics.StoryDataWrapper, error) {
+	id, err := utils.StringToInt64(c.Param(paramID))
 	if err != nil {
-		return c.Status(500).JSON(err)
+		return nil, err
 	}
-
-	result, err := sdk.GetAllStoryBySeriesID(seriesID)
-	if err != nil {
-		return c.Status(500).JSON(err)
-	}
-	return c.Status(200).JSON(result)
+	return business.GetAllStoryBySeriesID(c.Request.Context(), id)
 }
 
-func GetAllStory(c *fiber.Ctx) error {
-	result, err := sdk.GetAllStory()
-	if err != nil {
-		return c.Status(500).JSON(err)
-	}
-	return c.Status(200).JSON(result)
+func GetAllStory(c *gin.Context) (*comics.StoryDataWrapper, error) {
+	return business.GetAllStory(c.Request.Context())
 }
 
-func GetStoryByID(c *fiber.Ctx) error {
-	id, err := strconv.Atoi(c.Params("id"))
+func GetStoryByID(c *gin.Context) (*comics.StoryDataWrapper, error) {
+	id, err := utils.StringToInt64(c.Param(paramID))
 	if err != nil {
-		return c.Status(500).JSON(err)
+		return nil, err
 	}
-
-	result, err := sdk.GetStoryByID(id)
-	if err != nil {
-		return c.Status(500).JSON(err)
-	}
-	return c.Status(200).JSON(result)
+	return business.GetStoryByID(c.Request.Context(), id)
 }
 
-func GetAllCharacterByStoryID(c *fiber.Ctx) error {
-	storyID, err := strconv.Atoi(c.Params("storyID"))
+func GetAllCharacterByStoryID(c *gin.Context) (*comics.CharacterDataWrapper, error) {
+	id, err := utils.StringToInt64(c.Param(paramID))
 	if err != nil {
-		return c.Status(500).JSON(err)
+		return nil, err
 	}
-
-	result, err := sdk.GetAllCharacterByStoryID(storyID)
-	if err != nil {
-		return c.Status(500).JSON(err)
-	}
-	return c.Status(200).JSON(result)
+	return business.GetAllCharacterByStoryID(c.Request.Context(), id)
 }
 
-func GetAllComicByStoryID(c *fiber.Ctx) error {
-	storyID, err := strconv.Atoi(c.Params("storyID"))
+func GetAllComicByStoryID(c *gin.Context) (*comics.ComicDataWrapper, error) {
+	id, err := utils.StringToInt64(c.Param(paramID))
 	if err != nil {
-		return c.Status(500).JSON(err)
+		return nil, err
 	}
-
-	result, err := sdk.GetAllComicByStoryID(storyID)
-	if err != nil {
-		return c.Status(500).JSON(err)
-	}
-	return c.Status(200).JSON(result)
+	return business.GetAllComicByStoryID(c.Request.Context(), id)
 }
 
-func GetAllCreatorByStoryID(c *fiber.Ctx) error {
-	storyID, err := strconv.Atoi(c.Params("storyID"))
+func GetAllCreatorByStoryID(c *gin.Context) (*comics.CreatorDataWrapper, error) {
+	id, err := utils.StringToInt64(c.Param(paramID))
 	if err != nil {
-		return c.Status(500).JSON(err)
+		return nil, err
 	}
-
-	result, err := sdk.GetAllCreatorByStoryID(storyID)
-	if err != nil {
-		return c.Status(500).JSON(err)
-	}
-	return c.Status(200).JSON(result)
+	return business.GetAllCreatorByStoryID(c.Request.Context(), id)
 }
 
-func GetAllEventByStoryID(c *fiber.Ctx) error {
-	storyID, err := strconv.Atoi(c.Params("storyID"))
+func GetAllEventByStoryID(c *gin.Context) (*comics.EventDataWrapper, error) {
+	id, err := utils.StringToInt64(c.Param(paramID))
 	if err != nil {
-		return c.Status(500).JSON(err)
+		return nil, err
 	}
-
-	result, err := sdk.GetAllEventByStoryID(storyID)
-	if err != nil {
-		return c.Status(500).JSON(err)
-	}
-	return c.Status(200).JSON(result)
+	return business.GetAllEventByStoryID(c.Request.Context(), id)
 }
 
-func GetAllSeriesByStoryID(c *fiber.Ctx) error {
-	storyID, err := strconv.Atoi(c.Params("storyID"))
+func GetAllSeriesByStoryID(c *gin.Context) (*comics.SeriesDataWrapper, error) {
+	id, err := utils.StringToInt64(c.Param(paramID))
 	if err != nil {
-		return c.Status(500).JSON(err)
+		return nil, err
 	}
-
-	result, err := sdk.GetAllSeriesByStoryID(storyID)
-	if err != nil {
-		return c.Status(500).JSON(err)
-	}
-	return c.Status(200).JSON(result)
+	return business.GetAllSeriesByStoryID(c.Request.Context(), id)
 }

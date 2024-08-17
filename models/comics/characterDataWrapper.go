@@ -1,4 +1,4 @@
-package models
+package comics
 
 type CharacterDataWrapper struct {
 	Code            int                    `json:"code"`

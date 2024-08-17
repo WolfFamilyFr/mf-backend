@@ -1,10 +1,11 @@
 package rivals
 
-import "gorm.io/gorm"
+import "github.com/uptrace/bun"
 
 type Ability struct {
-	gorm.Model
-	ID          uint        `json:"id"`
+	bun.BaseModel `bun:"table:ability"`
+
+	ID          int64       `json:"id" bun:",pk,autoincrement"`
 	Name        string      `json:"name"`
 	Type        AbilityType `json:"type"`
 	Description string      `json:"description"`

@@ -1,4 +1,4 @@
-package models
+package comics
 
 type EventList struct {
 	Available     int            `json:"available"`

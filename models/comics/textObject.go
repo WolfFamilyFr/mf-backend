@@ -1,4 +1,4 @@
-package models
+package comics
 
 type TextObject struct {
 	Type     string `json:"type"`

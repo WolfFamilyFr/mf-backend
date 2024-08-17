@@ -1,4 +1,4 @@
-package models
+package comics
 
 type CreatorDataWrapper struct {
 	Code            int                  `json:"code"`

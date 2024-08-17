@@ -1,51 +1,45 @@
 package database
 
 import (
+	"database/sql"
 	"fmt"
-	"log"
 	"os"
 
-	"github.com/bchaillou003/marvel-family-backend/models/rivals"
-	"gorm.io/driver/postgres"
-	"gorm.io/gorm"
-	"gorm.io/gorm/logger"
+	"github.com/uptrace/bun"
+	"github.com/uptrace/bun/dialect/pgdialect"
+	"github.com/uptrace/bun/driver/pgdriver"
+	"github.com/uptrace/bun/extra/bundebug"
 )
 
-type Dbinstance struct {
-	Db *gorm.DB
+type IDB interface {
+	IRivals
 }
 
-var DB Dbinstance
+type DB = bun.DB
 
-func ConnectDb() {
-	dsn := fmt.Sprintf("host=localhost user=%s password=%s dbname=%s port=5432 sslmode=disable",
+type Database struct {
+	bun.IDB
+}
+
+func NewDatabase() Database {
+	dsn := fmt.Sprintf("postgres://%s:%s@localhost:5432/%s?sslmode=disable",
 		os.Getenv("DB_USER"),
 		os.Getenv("DB_PASSWORD"),
-		os.Getenv("DB_NAME"),
-	)
+		os.Getenv("DB_NAME"))
+	sqldb := sql.OpenDB(pgdriver.NewConnector(pgdriver.WithDSN(dsn)))
+	db := bun.NewDB(sqldb, pgdialect.New())
 
-	db, err := gorm.Open(postgres.Open(dsn), &gorm.Config{
-		Logger: logger.Default.LogMode(logger.Info),
-	})
+	db.AddQueryHook(bundebug.NewQueryHook(
+		bundebug.WithVerbose(true),
+		bundebug.FromEnv("BUNDEBUG"),
+	))
 
-	if err != nil {
-		log.Fatal("Failed to connect to database. \n", err)
-		os.Exit(2)
+	return Database{db}
+}
+
+func (db Database) Close() error {
+	if bunDB, ok := db.IDB.(*bun.DB); ok {
+		return bunDB.Close()
 	}
-
-	log.Println("connected")
-	db.Logger = logger.Default.LogMode(logger.Info)
-
-	log.Println("running migrations")
-	db.AutoMigrate(
-		&rivals.Character{},
-		&rivals.Achievement{},
-		&rivals.Lore{},
-		&rivals.Ability{},
-		&rivals.Cosmetic{},
-	)
-
-	DB = Dbinstance{
-		Db: db,
-	}
+	return nil
 }

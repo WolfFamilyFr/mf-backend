@@ -1,4 +1,4 @@
-package models
+package comics
 
 type Image struct {
 	Path      string `json:"path"`

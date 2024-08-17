@@ -1,15 +1,16 @@
 package rivals
 
-import "gorm.io/gorm"
+import "github.com/uptrace/bun"
 
 type Achievement struct {
-	gorm.Model
-	ID          uint            `json:"id"`
+	bun.BaseModel `bun:"table:achievement"`
+
+	ID          int64           `json:"id" bun:",pk,autoincrement"`
 	Name        string          `json:"name"`
 	Type        AchievementType `json:"type"`
 	Description string          `json:"description"`
-	NbTask      uint            `json:"nb_task"`
-	Cosmetic    Cosmetic        `gorm:"foreignKey:ID"`
+	NbTask      int64           `json:"nb_task"`
+	CosmeticID  int64           `json:"cosmetic_id"`
 }
 
 type AchievementType string

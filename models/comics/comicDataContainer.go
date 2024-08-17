@@ -1,4 +1,4 @@
-package models
+package comics
 
 type ComicDataContainer struct {
 	Offset  int     `json:"offset"`

@@ -1,4 +1,4 @@
-package models
+package comics
 
 type StoryList struct {
 	Available     int            `json:"available"`

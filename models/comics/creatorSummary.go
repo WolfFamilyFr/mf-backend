@@ -1,4 +1,4 @@
-package models
+package comics
 
 type CreatorSummary struct {
 	ResourceURI string `json:"resourceURI"`

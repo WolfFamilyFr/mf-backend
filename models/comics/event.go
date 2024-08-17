@@ -1,4 +1,4 @@
-package models
+package comics
 
 type Event struct {
 	ID          int           `json:"id"`

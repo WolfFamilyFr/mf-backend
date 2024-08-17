@@ -1,4 +1,4 @@
-package models
+package comics
 
 type ComicPrice struct {
 	Type  string  `json:"type"`

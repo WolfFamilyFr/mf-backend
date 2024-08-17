@@ -1,10 +1,11 @@
 package rivals
 
-import "gorm.io/gorm"
+import "github.com/uptrace/bun"
 
 type Cosmetic struct {
-	gorm.Model
-	ID      uint         `json:"id"`
+	bun.BaseModel `bun:"table:cosmetic"`
+
+	ID      int64        `json:"id" bun:",pk,autoincrement"`
 	Name    string       `json:"name"`
 	Type    CosmeticType `json:"type"`
 	Default bool         `json:"default"`

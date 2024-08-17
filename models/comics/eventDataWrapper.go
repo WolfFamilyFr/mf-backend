@@ -1,4 +1,4 @@
-package models
+package comics
 
 type EventDataWrapper struct {
 	Code            int                `json:"code"`

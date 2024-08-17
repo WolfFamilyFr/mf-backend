@@ -1,13 +1,13 @@
 package rivals
 
 import (
-	"github.com/lib/pq"
-	"gorm.io/gorm"
+	"github.com/uptrace/bun"
 )
 
 type Lore struct {
-	gorm.Model
-	ID         uint           `json:"id"`
-	Name       string         `json:"name"`
-	Paragraphs pq.StringArray `json:"paragraphs" gorm:"type:text[]"`
+	bun.BaseModel `bun:"table:lore"`
+
+	ID        int64  `json:"id" bun:",pk,autoincrement"`
+	Name      string `json:"name"`
+	Paragraph string `json:"paragraph"`
 }

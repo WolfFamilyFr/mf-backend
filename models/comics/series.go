@@ -1,4 +1,4 @@
-package models
+package comics
 
 type Series struct {
 	ID          int           `json:"id"`
