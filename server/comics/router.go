@@ -62,7 +62,7 @@ func setupCharactersRoutes(group *gin.RouterGroup) {
 			c.JSON(http.StatusOK, result)
 		})
 		charactersGroup.GET("/:id/stories", func(c *gin.Context) {
-			result, err := GetAllStoriesByCharacterID(c)
+			result, err := GetAllStoryByCharacterID(c)
 			if err != nil {
 				c.JSON(http.StatusInternalServerError, gin.H{"status": err})
 				return

@@ -27,8 +27,8 @@ func GetAllSeriesByCharacterID(ctx context.Context, characterID int64) (*comics.
 	return application.ClientSDKFromContext(ctx).GetAllSeriesByCharacterID(characterID)
 }
 
-func GetAllStoriesByCharacterID(ctx context.Context, characterID int64) (*comics.StoryDataWrapper, error) {
-	return application.ClientSDKFromContext(ctx).GetAllStoriesByCharacterID(characterID)
+func GetAllStoryByCharacterID(ctx context.Context, characterID int64) (*comics.StoryDataWrapper, error) {
+	return application.ClientSDKFromContext(ctx).GetAllStoryByCharacterID(characterID)
 }
 
 func GetAllComic(ctx context.Context) (*comics.ComicDataWrapper, error) {

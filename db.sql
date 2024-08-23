@@ -244,3 +244,23 @@ INSERT INTO character (nickname, first_name, last_name, role, difficulty, descri
 		2,
 		'Most land sharks are vicious creatures of the deep... but not Jeff! This adorable and mischievous little land shark brings splashes of joy and healing to every battle. But if the tide turns, Jeff can morph into a voracious beast, swallowing an army of foes in one giant gulp!'
 	);
+
+INSERT INTO character (nickname, first_name, last_name, role, difficulty, description)
+	VALUES (
+		'Winter Soldier',
+		'James "Bucky"',
+		'Barnes',
+		'Duelist',
+		2,
+		'Terrifying experiments turned him into a brainwashed assassin, but now james "Bucky" Barnes is in control of his own fate once again. With his enhanced mechanical arm, the Winter Soldier is primed to deliver earth- shattering blows to any foe in his path!'
+	);
+
+INSERT INTO character (nickname, first_name, last_name, role, difficulty, description)
+	VALUES (
+		'Captain America',
+		'Steven "Steve"',
+		'Rogers',
+		'Vanguard',
+		2,
+		'Enhanced by the Super- Soldier Serum, Steven "Steve" Rogers uses his Vibranium shield and extensive combat training to confront any threat to justice. When Captain America rallies his troops, a wave of courage sweeps across the battlefield!'
+	);

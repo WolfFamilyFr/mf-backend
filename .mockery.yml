@@ -1,0 +1,16 @@
+with-expecter: true
+dir: "{{.InterfaceDir}}/mocks"
+outpkg: "mocks"
+packages:
+  github.com/bchaillou003/marvel-family-backend/database:
+    interfaces:
+      IDB:
+        config:
+          mockname: "DatabaseMock"
+          filename: "IDB.go"
+  github.com/bchaillou003/marvel-family-backend/sdk:
+    interfaces:
+      ISDK:
+        config:
+          mockname: "ClientSDKMock"
+          filename: "ISDK.go"
