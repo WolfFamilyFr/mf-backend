@@ -10,7 +10,7 @@ import (
 
 type App struct {
 	Database  database.IDB
-	ClientSDK sdk.ClientSDK
+	ClientSDK sdk.ISDK
 }
 
 var appKey *App
@@ -51,6 +51,6 @@ func DatabaseFromContext(ctx context.Context) database.IDB {
 }
 
 // ClientSDKFromContext returns ClientSDK
-func ClientSDKFromContext(ctx context.Context) sdk.ClientSDK {
+func ClientSDKFromContext(ctx context.Context) sdk.ISDK {
 	return FromContext(ctx).ClientSDK
 }

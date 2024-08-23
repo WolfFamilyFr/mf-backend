@@ -13,3 +13,11 @@ Executer le script SQL db.sql dans une DB postgres afin d'initialiser la base
 
 Executer le backend en local
 - air cmd/main.go -b 0.0.0.0
+
+Installer mockery
+- go install github.com/vektra/mockery/v2@latest
+Générer mock
+- /home/skealler/go/bin/mockery --config ".mockery.yml"
+
+Lancer les tests unitaires
+- go test ./... -v

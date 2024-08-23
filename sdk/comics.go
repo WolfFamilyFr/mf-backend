@@ -28,7 +28,7 @@ type IComicsSDK interface {
 	GetAllComicByCharacterID(characterID int64) (*comics.ComicDataWrapper, error)
 	GetAllEventByCharacterID(characterID int64) (*comics.EventDataWrapper, error)
 	GetAllSeriesByCharacterID(characterID int64) (*comics.SeriesDataWrapper, error)
-	GetAllStoriesByCharacterID(characterID int64) (*comics.StoryDataWrapper, error)
+	GetAllStoryByCharacterID(characterID int64) (*comics.StoryDataWrapper, error)
 
 	GetAllComic() (*comics.ComicDataWrapper, error)
 	GetComicByID(id int64) (*comics.ComicDataWrapper, error)
@@ -101,7 +101,7 @@ func (c ClientSDK) GetAllSeriesByCharacterID(characterID int64) (*comics.SeriesD
 	return &out, err
 }
 
-func (c ClientSDK) GetAllStoriesByCharacterID(characterID int64) (*comics.StoryDataWrapper, error) {
+func (c ClientSDK) GetAllStoryByCharacterID(characterID int64) (*comics.StoryDataWrapper, error) {
 	url := buildURL(fmt.Sprintf("/v1/public/characters/%d/stories", characterID))
 	var out comics.StoryDataWrapper
 	err := c.get(url, &out)

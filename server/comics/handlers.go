@@ -47,12 +47,12 @@ func GetAllSeriesByCharacterID(c *gin.Context) (*comics.SeriesDataWrapper, error
 	return business.GetAllSeriesByCharacterID(c.Request.Context(), id)
 }
 
-func GetAllStoriesByCharacterID(c *gin.Context) (*comics.StoryDataWrapper, error) {
+func GetAllStoryByCharacterID(c *gin.Context) (*comics.StoryDataWrapper, error) {
 	id, err := utils.StringToInt64(c.Param(paramID))
 	if err != nil {
 		return nil, err
 	}
-	return business.GetAllStoriesByCharacterID(c.Request.Context(), id)
+	return business.GetAllStoryByCharacterID(c.Request.Context(), id)
 }
 
 func GetAllComic(c *gin.Context) (*comics.ComicDataWrapper, error) {
